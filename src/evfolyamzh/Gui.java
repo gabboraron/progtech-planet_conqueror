@@ -7,9 +7,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -21,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
  * @author Sándor
  */
 class Gui {
-
+    private coordinate gameSize;
     private Game game;
     private GridButtonPanel gpanel;
     private boolean poused = false;
@@ -32,6 +35,16 @@ class Gui {
         gpanel.display();
         
         showGame();
+        gameSize = new coordinate(4,4);
+    }
+
+    private Gui(int row, int col) {
+        game = new Game(row,col);
+        gpanel = new GridButtonPanel(game, this, row, col);
+        gpanel.display();
+        
+        showGame();
+        gameSize = new coordinate(row,col);
     }
     
     /**
@@ -202,6 +215,42 @@ class Gui {
     }
     
     /**
+     * NEW GAME MENU WITH MENU OPTIONS
+     * @return 
+     */
+    JMenu newGameMenu() {
+        JMenu m = new JMenu("New game");
+        gpanel.fourTimeFour = new JMenuItem(fourTimeFour);
+        gpanel.sixTimeEight = new JMenuItem(sixTimeEight);
+        m.add(fourTimeFour);
+        m.add(sixTimeEight);
+        
+        return m;
+    }
+    
+    /**
+     * MENU ITEM
+     */
+    private AbstractAction fourTimeFour = new AbstractAction("4X4") {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {                    
+            Gui gui = new Gui(4,4);
+        }
+    };
+    
+    /**
+     * MENU ITEM
+     */
+    private AbstractAction sixTimeEight = new AbstractAction("6X8") {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {                    
+            Gui gui = new Gui(6,8);
+        }
+    };
+       
+    /**
      * CHANGE LABEL OF PLAYERS POINTS
      */
     private void changePlayersPoints() {
@@ -209,6 +258,15 @@ class Gui {
         gpanel.sppLabel.setText("Player 2 points: " + game.player2.points);
     }
 
+    /**
+     * CHANGE PLAYERS OCCUPIED TILES NUMBERS
+     */
+    private void changePlayersOccupiedTiles() {
+        if((game.player1.occupiedTiles != 0) || (game.player2.occupiedTiles != 0)){
+            gpanel.ptLabel.setText("<html><body>Player 1 occupied:" + game.player1.occupiedTiles  + "<br>Player 2 occupied: " + (game.player2.occupiedTiles-4) + "</body></html>");
+        }
+    }
+    
     /**
      * Change the tiles values and etc in game when a tile is clicked
      * @param row
@@ -231,10 +289,12 @@ class Gui {
         game.countPlayerspoints();
         changePlayerLabel();
         changePlayersPoints();
+        changePlayersOccupiedTiles();
         
         showGame();
         
         if(game.isWinner()){
+            poused = true;
             if(game.player1.points>game.player2.points){
                 JOptionPane.showMessageDialog(null, "PLAYER 1 WIN! CONGRATULATIONS!");
             } else {
@@ -242,6 +302,7 @@ class Gui {
             }
         }
     }
+
 
     
 

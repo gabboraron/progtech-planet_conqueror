@@ -24,6 +24,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,10 +38,15 @@ public class GridButtonPanel {
     private JFrame f;   //main JFrame
     JPanel p;           //grid panel
     JPanel n;           //nav panel
-    public JPanel box;         //box in nav panel
-    public JLabel cpLabel;     //current player label
-    public JLabel fppLabel;    //first players points
-    public JLabel sppLabel;    //second plpayers points
+    public JPanel box;              //box in nav panel
+    public JLabel cpLabel;          //current player label
+    public JLabel fppLabel;         //first player's points
+    public JLabel sppLabel;         //second plpayer's points
+    public JLabel ptLabel;          //occupied territories by players
+    private JMenuBar menuBar;       //main menubar
+    private JMenu  newGameMenu;     //new game menu button
+    public JMenuItem sixTimeEight;  //menu option
+    public JMenuItem fourTimeFour;  //menu option
     
     /**/
     Game game;
@@ -141,11 +149,16 @@ public class GridButtonPanel {
         cpLabel = gui.currentPlayerLabel(game.currentPlayer);
         fppLabel = gui.firstPlayerPointsLabel();
         sppLabel = gui.secondPlayerPointsLabel();
+        ptLabel = new JLabel();
+        newGameMenu = gui.newGameMenu();
         //JScrollPane oList = gui.optionsList();
         
         //n.add(rBtn, BorderLayout.EAST);
         //n.add(pBtn, BorderLayout.WEST);
         //n.add(bBtn, BorderLayout.WEST);
+        menuBar =  new JMenuBar();
+        menuBar.add(newGameMenu);
+        n.add(menuBar, BorderLayout.NORTH);
         n.add(tLabel, BorderLayout.EAST);
         //n.add(cpLabel, BorderLayout.CENTER);
         //n.add(fppLabel, BorderLayout.SOUTH);
@@ -153,6 +166,7 @@ public class GridButtonPanel {
         box.add(cpLabel);
         box.add(fppLabel);
         box.add(sppLabel);
+        box.add(ptLabel);
         //n.add(oList, BorderLayout.WEST);
         
         n.add(box, BorderLayout.WEST);

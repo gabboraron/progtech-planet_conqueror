@@ -40,6 +40,24 @@ public class Tile {
                        ptToOccupation = 15;
                        owner = 0;
                        break;
+            case "M" : this.type = "M";
+                       occupied = false;
+                       nrOfAttacksNeeded = 3;
+                       ptToOccupation = 40;
+                       owner = 0;
+                       break;
+            case "F" : this.type = "F";
+                       occupied = false;
+                       nrOfAttacksNeeded = 3;
+                       ptToOccupation = 50;
+                       owner = 0;
+                       break;
+            case "V" : this.type = "V";
+                       occupied = false;
+                       nrOfAttacksNeeded = 4;
+                       ptToOccupation = 75;
+                       owner = 0;
+                       break;
         }
     }
 
@@ -58,23 +76,33 @@ public class Tile {
     public String getLabelOfTile(){
         String s = "";
         if(!isOccupied()){
-            switch(type){
+            if(type.equals("I")){
+                s +="";
+            } else {
+                s += type + "(" + nrOfAttacks + "/" + nrOfAttacksNeeded + ")";
+            }
+            /*switch(type){
                 case "I" : s += "";
                            break;
                 case "C" : s += type + "(" + nrOfAttacks + "/" + nrOfAttacksNeeded + ")";
                            break;
                 case "P" : s += type + "(" + nrOfAttacks + "/" + nrOfAttacksNeeded + ")";
                            break;
-            }
+            }*/
         } else {
-            switch(type){
+            if(type.equals("I")){
+                s+="";
+            } else {
+                s += type;
+            }
+            /*switch(type){
                 case "I" : s += "";
                            break;
                 case "C" : s += type;
                            break;
                 case "P" : s += type;
                            break;
-            }
+            }*/
         }
         
         return s;

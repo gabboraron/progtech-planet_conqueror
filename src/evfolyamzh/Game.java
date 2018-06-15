@@ -61,13 +61,26 @@ class Game {
      * @return 
      */
     private String genereteTypeOfTile() {
-        int random = randInt(0,1);
+        int random = randInt(0,4);
         String s = "";
-        if(random == 0){
+        switch(random){
+            case 0 : s = "C";
+                     break;
+            case 1 : s = "P";
+                     break;
+            case 2 : s = "M";
+                     break;
+            case 3 : s = "F";
+                     break;
+            case 4 : s = "V";
+                     break;
+                    
+        }
+ /*       if(random == 0){
             s = "C";
         } else {
             s = "P";
-        }
+        }*/
         return s;
     }
     
@@ -103,17 +116,23 @@ class Game {
     }
 
     /**
-     * Count players points
+     * Count players points and occupied territories
      */
     void countPlayerspoints() {
         player1.points = 0;
         player2.points = 0;
+        
+        player1.occupiedTiles = 0;
+        player2.occupiedTiles = 0;
+        
         for(int idx = 0; idx<tiles.size(); ++idx){
             if(((Tile) tiles.get(idx)).isOccupied()){
                 if(((Tile) tiles.get(idx)).getOwner() == 1){
                     player1.points += ((Tile) tiles.get(idx)).getPtToOccupation();
+                    player1.occupiedTiles = player1.occupiedTiles + 1;
                 } else {
                     player2.points += ((Tile) tiles.get(idx)).getPtToOccupation();
+                    player2.occupiedTiles = player2.occupiedTiles + 1;
                 }
             }
         }
