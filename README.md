@@ -9,9 +9,9 @@ A játékban a két játékos különböző logika mentén foglal területeket. 
 # 2. rész (KÖZEPES):  
 
 Készíts egy menüt, melynek a segítségével új játékot tudunk indítani, és legyen lehetőségünk a játékot 6x8as táblán is játszani.   Amennyiben nem így készítetted volna el az első részben a játék végének a megállapítását, úgy a játék abban a pillanatban érjen véget, amikor az egyik játékos legalább a megszerezhető pontok felénél eggyel többet birtokol. A játék végénél jelenjen meg egy felugró üzenet, melyben gratulálunk a nyertes játékosnak. Az elfoglalható területek típusát bővítsd ki az alábbiakkal: 
- --  rét (MEADOW) – 40 pontot ér és 3 az ellenállása 
- -- erdő (FOREST) – 50 pontot ér és 3 az ellenállása 
- -- falu (VILLAGE) – 75 pontot ér és 4 az ellenállása 
+ *  rét (MEADOW) – 40 pontot ér és 3 az ellenállása 
+ * erdő (FOREST) – 50 pontot ér és 3 az ellenállása 
+ * falu (VILLAGE) – 75 pontot ér és 4 az ellenállása 
 
 # 3. rész (JÓ): 
 Az alkalmazást az MV architektúrának megfelelően implementáld. 
